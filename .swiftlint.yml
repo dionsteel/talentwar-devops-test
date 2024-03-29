@@ -35,6 +35,9 @@ excluded: # paths to ignore during linting. overridden by `included`.
   - Carthage
   - Pods
   - Modules
+  - DevOpsTest/Assets.xcassets
+  - DevOpsTest/DevOpsTest.xcdatamodelId
+  - DevOpsTest/Preview Content
 
 identifier_name:
   min_length: 5
