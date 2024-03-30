@@ -2,9 +2,9 @@ name: Swift
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "citesting" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "citesting" ]
 
 jobs:
   build:
@@ -15,7 +15,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Lint
       run: swift run swiftlint
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - name: Build and test base module with XCode
+      run: xcodebuild clean test -scheme 'DevOpsTestTests' -destination 'platform=macOS' -showBuildTimingSummary
+    - name: Build and test UI Tests with XCode
+      run: xcodebuild clean test -scheme 'DevOpsTestUITests' -destination 'platform=macOS' -showBuildTimingSummary
+    - name: Build final with XCode
+      run: xcodebuild clean test -scheme 'DevOpsTest' -destination 'platform=macOS' -showBuildTimingSummary
+
