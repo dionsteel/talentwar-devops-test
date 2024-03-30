@@ -10,7 +10,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 elif [[ "$OSTYPE" == "msys"* ]]; then
   set +x
   echo "Swiftlint doesn't work on windows, will attempt to docker it"
-  docker run -t -v `pwd`:/workdir -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
+  docker run -t -v /`pwd`:/workdir -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
 fi
 if [ $? -eq 0 ]; then 
   echo "Linting failed."
