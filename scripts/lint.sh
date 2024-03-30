@@ -3,14 +3,15 @@ echo "Linting source code..."
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   echo "Running swiftlint for linux with docker:"
   docker pull ghcr.io/realm/swiftlint:latest
-  docker run -t -v `pwd`:/workdir -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
+  docker run -t -v `pwd`:`pwd` -w `pwd` ghcr.io/realm/swiftlint:latest swiftlint
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Running swiftlint for MacOS:"
   swift run swiftlint
 elif [[ "$OSTYPE" == "msys"* ]]; then
   set +x
-  echo "Swiftlint doesn't work on windows, will attempt to docker it"
-  docker run -t -v /workdir:`pwd` -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
+  echo "Swiftlint doesn't work on windows, there is a workaround but you will need to edit this part of scripts/lint.sh"
+  echo "This will crash due to path escaping issues, please replace pwd with project directory, fully escaped, then uncomment the next line."
+  ## docker run -t -v `pwd`:/workdir -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
 fi
 if [ $? -eq 0 ]; then 
   echo "Linting failed."
