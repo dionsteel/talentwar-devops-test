@@ -13,8 +13,9 @@ elif [[ "$OSTYPE" == "msys"* ]]; then
   echo "This will crash due to path escaping issues, please replace pwd with project directory, fully escaped, then uncomment the next line."
   ## docker run -t -v `pwd`:/workdir -w /workdir ghcr.io/realm/swiftlint:latest swiftlint
 fi
+
 if [ $? -eq 1 ]; then 
-  echo "Linting failed."
+  echo "Cannot allow commit, code linting failed. See above for specific errors."
   exit 1;
 fi
 
